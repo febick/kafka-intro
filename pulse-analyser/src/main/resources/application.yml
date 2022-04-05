@@ -1,0 +1,21 @@
+spring:
+    cloud:
+        config:
+            enabled: false
+            import-check:
+                enabled: false
+        stream:
+            bindings:
+                pulseConsumer-in-0:
+                    destination: vxlcdanj-default
+                    group: vxlcdanj-analyser
+    kafka:
+        bootstrap-servers: rocket-01.srvs.cloudkafka.com:9094,rocket-02.srvs.cloudkafka.com:9094,rocket-03.srvs.cloudkafka.com:9094
+        properties:
+            sasl:
+                jaas:
+                    config: org.apache.kafka.common.security.scram.ScramLoginModule
+                        required username="vxlcdanj" password="vGAaHdKmT9SADRD2xFkOL0C5o_ytdXym";
+                mechanism: SCRAM-SHA-256
+            security:
+                protocol: SASL_SSL
