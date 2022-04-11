@@ -6,8 +6,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import telran.pulse.monitoring.dto.Sensor;
-import telran.pulse.monitoring.entities.AverageDocument;
-import telran.pulse.monitoring.repo.AverageRepository;
+import telran.pulse.monitoring.entities.SensorDocument;
+import telran.pulse.monitoring.repo.SensorRepository;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -19,7 +19,7 @@ import java.util.function.Consumer;
 @AllArgsConstructor
 public class AveragePopulatorAppl {
 
-    AverageRepository averageRepository;
+    SensorRepository sensorRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(AveragePopulatorAppl.class, args);
@@ -35,13 +35,13 @@ public class AveragePopulatorAppl {
                 sensor.id,
                 sensor.value);
 
-        AverageDocument document = AverageDocument.builder()
+        SensorDocument document = SensorDocument.builder()
                 .sensorId(sensor.id)
                 .value(sensor.value)
                 .timestamp(LocalDateTime.ofInstant(Instant.ofEpochMilli(sensor.timeStamp), ZoneId.systemDefault()))
                 .build();
 
-        averageRepository.insert(document);
+        sensorRepository.insert(document);
     }
 
 }

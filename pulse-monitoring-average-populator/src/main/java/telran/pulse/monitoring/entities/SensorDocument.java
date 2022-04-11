@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Document(collection = "average")
 @Builder
 @Getter
-public class AverageDocument {
+public class SensorDocument {
 
     @Indexed
     private int sensorId;

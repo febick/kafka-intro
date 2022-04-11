@@ -11,7 +11,6 @@ import java.util.function.Supplier;
 @SpringBootApplication
 public class PulseSourceAppl {
 
-    private int count = 0;
     static ConfigurableApplicationContext context;
 
     public static void main(String[] args) {
@@ -26,9 +25,7 @@ public class PulseSourceAppl {
     private Sensor randomPulseGenerator() {
         int id = getRandomNumber(1, 10);
         int value= getRandomNumber(40, 220);
-        Sensor sensor = new Sensor(id, value);
-//        if (count > 100) context.close();
-        return sensor;
+        return new Sensor(id, value);
     }
 
     private int getRandomNumber(int min, int max) {
