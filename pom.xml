@@ -10,6 +10,8 @@
         <module>pulse-monitoring-jumps-populator</module>
         <module>pulse-monitoring-jumps-notifier</module>
         <module>pulse-monitoring-avg-reducer</module>
+        <module>pulse-monitoring-doctor-data-provider</module>
+        <module>pulse-monitoring-average-populator</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

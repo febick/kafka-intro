@@ -25,7 +25,7 @@ public class AnalyserService {
     @Autowired
     SensorRepository sensorRepository;
 
-    @Value("${app.jump.threshold:50}")
+    @Value("${app.jump.threshold:80}")
     int jumpPercentThreshold;
 
     @Value("${app.critical.threshold:100}")

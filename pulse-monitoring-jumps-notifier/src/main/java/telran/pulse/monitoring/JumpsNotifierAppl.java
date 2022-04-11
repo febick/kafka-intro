@@ -1,15 +1,29 @@
 package telran.pulse.monitoring;
 
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import telran.pulse.monitoring.dto.Jump;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.*;
+import telran.pulse.monitoring.dto.*;
 import java.util.function.Consumer;
 
 @SpringBootApplication
 @Slf4j
+@NoArgsConstructor
 public class JumpsNotifierAppl {
+
+    @Value("${app.mail.subject: Critical Pulse Jump}")
+    String subject;
+
+    @Autowired
+    JavaMailSender javaMailSender;
+
+    @Autowired
+    DataProviderClient client;
 
     public static void main(String[] args) {
         SpringApplication.run(JumpsNotifierAppl.class, args);
@@ -21,10 +35,22 @@ public class JumpsNotifierAppl {
     }
 
     private void jumpsProcessing(Jump jump) {
-        log.trace("Received sensor id {} previous value {} current value {}",
-                jump.sensorId,
-                jump.previousValue,
-                jump.currentValue);
+        DoctorPatientData data = client.getData(jump.sensorId);
+        sendMail(data, jump);
+    }
+
+    private void sendMail(DoctorPatientData data, Jump jump) {
+        String letterText = String.format("Patient %s has a critical pulse jump - from %d to %d",
+                data.patientName, jump.previousValue, jump.currentValue);
+
+        log.debug("SendMail: to {} with text {}", data.email, letterText);
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(data.email);
+        message.setSubject(subject);
+        message.setCc("device2@yandex.ru");
+        message.setText(letterText);
+//        javaMailSender.send(message);
     }
 
 }
