@@ -34,7 +34,7 @@ public class SensorValueServiceImpl implements SensorValueService {
         double result = mongoTemplate
                 .aggregate(pipeline, SensorDocument.class, Document.class)
                 .getUniqueMappedResult()
-                .getDouble("avr_value");
+                .getDouble("avg_value");
         return (int) result;
     }
 
