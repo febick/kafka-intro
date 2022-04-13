@@ -35,6 +35,15 @@
             <artifactId>pulse-monitoring-dto</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.netty/netty-resolver-dns-native-macos -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-resolver-dns-native-macos</artifactId>
+            <classifier>osx-aarch_64</classifier>
+            <version>4.1.76.Final</version>
+        </dependency>
+
+
     </dependencies>
 
     <dependencyManagement>
