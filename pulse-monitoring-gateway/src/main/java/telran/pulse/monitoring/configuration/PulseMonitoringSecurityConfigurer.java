@@ -17,6 +17,7 @@ public class PulseMonitoringSecurityConfigurer {
 
     @Bean
     SecurityWebFilterChain getSecurityWebFilterChain(ServerHttpSecurity http) {
+//        http.addFilterBefore();
         http.httpBasic();
         http.cors().and().csrf().disable();
         http.authorizeExchange().pathMatchers("/login").permitAll();
