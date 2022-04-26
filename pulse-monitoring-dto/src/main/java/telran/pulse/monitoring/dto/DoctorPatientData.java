@@ -4,6 +4,7 @@ import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class DoctorPatientData {
 
     public String email;

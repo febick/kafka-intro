@@ -48,9 +48,8 @@ public class JumpsNotifierAppl {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(data.email);
         message.setSubject(subject);
-        message.setCc("device2@yandex.ru");
         message.setText(letterText);
-//        javaMailSender.send(message);
+        javaMailSender.send(message);
     }
 
 }
